@@ -1,0 +1,267 @@
+$color-green: #43A948;
+$color-green-lite: #1eb31e;
+$color-red: #db073d;
+$color-hover-list: #fffcf7;
+$color-title: #363636;
+
+%shared-block {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+}
+%shared-input {
+  width: 200px;
+  margin-bottom: 15px;
+  padding: 5.5px 5px;
+  border: 1px solid silver;
+  border-radius: 10px;
+  &:last-child{
+    margin-bottom: 0;
+  }
+  &:focus{
+    border: 1px solid $color-green;
+    box-shadow: 0 0 2px $color-green;
+  }
+}
+@mixin shared-button($color){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid $color;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #fff;
+  height: 29px;
+  width: 100px;
+  line-height: 17px;
+  color: $color;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: .3s all;
+  &:hover{
+    background: $color;
+    color: #FFFFFF;
+    transition: .3s all;
+  }
+}
+@mixin shared-title($color, $size){
+  font-size: $size !important;
+  color: $color;
+}
+
+body{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  button, input{
+    outline: none;
+  }
+  a{
+    text-decoration: none;
+  }
+}
+.phone-list{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  &_menu{
+    @extend %shared-block;
+    padding: 10px 0;
+    background: $color-green-lite;
+    .header{
+      @extend %shared-block;
+      .search-block{
+        width: 50%;
+        margin-right: 20px;
+        input{
+          @extend %shared-input;
+          width: 100%;
+        }
+      }
+      .open-modal{
+        @include shared-button($color-title);
+      }
+    }
+  }
+  &_children{
+    padding: 0 15px 30px;
+    .card-list{
+      padding: 30px 0;
+      @extend %shared-block;
+      &_image_block{
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .img{
+          border-radius: 100%;
+          width: 200px;
+          height: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img{
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+      &_content_block{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        input{
+          @extend %shared-input;
+          margin-top: 5px;
+        }
+        .button-content{
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: baseline;
+          &_add{
+            @include shared-button($color-green);
+          }
+          &_delete{
+            @include shared-button($color-red);
+            font-size: 14px;
+          }
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+        button{
+          margin-top: 10px;
+        }
+      }
+    }
+    .contacts-block{
+      @extend %shared-block;
+      flex-direction: column;
+      p{
+        font-size: 20px;
+      }
+      &_content{
+        padding-top: 20px;
+        width: 100%;
+        .list-contacts{
+          @extend %shared-block;
+          align-items: baseline;
+          justify-content: space-between;
+          border-bottom: 1px solid silver;
+          h1{
+            @include shared-title($color-title, 20px)
+          }
+          span{
+            @include shared-title(#000000, 18px)
+          }
+          &:hover{
+            background: $color-hover-list;
+          }
+        }
+      }
+    }
+  }
+}
+
+.ReactModal__Content{
+  border: none !important;
+  padding-top: 42px !important;
+  background: transparent !important;
+  position: relative;
+  ::-webkit-scrollbar-button{
+    width: 20px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 15px;
+  }
+  ::-webkit-scrollbar {
+    height: 17px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #43A948;
+    border-radius: 15px;
+    width: 100px !important;
+  }
+  .modal-block{
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    height: 240px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    border-radius: 6px;
+    padding: 10px 20px 15px 20px;
+    h2{
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 22px;
+    }
+    .button-close{
+      position: absolute;
+      top: 0;
+      right: 25px;
+      background: #b0b834;
+      color: #e3e6b6;
+      border-radius: 100%;
+      border: none;
+      width: 30px;
+      height: 30px;
+      outline: none;
+      cursor: pointer;
+    }
+    &_content{
+      input{
+        @extend %shared-input;
+        margin-top: 5px;
+      }
+    }
+    &_footer{
+      .right{
+        @include shared-button($color-green);
+      }
+    }
+  }
+  .modal-block::before {
+    content: '';
+    position: absolute;
+    right: 30px;
+    top: 22.9px;
+    border: 10px solid transparent;
+    border-top: 10px solid rgb(204, 204, 204);
+
+    transform: rotate(180deg);
+  }
+  .modal-block::after {
+    content: '';
+    position: absolute;
+    right: 30px;
+    top: 23.6px;
+    border: 10px solid transparent;
+    border-top: 10px solid rgb(255, 255, 255);
+    transform: rotate(180deg);
+  }
+  @media screen and (max-width: 500px) {
+    padding: 42px 0 10px 0 !important;
+  }
+}
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+  z-index: 1000000;
+}
+.ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+.ReactModal__Overlay--before-close{
+  opacity: 0;
+}
+.special-label{
+  display: none;
+}
