@@ -6,7 +6,6 @@ import Card from "./Card";
 
 const PhoneCard = () => {
     const {state} = useCustomStore();
-    console.log('state', state.viewingPhone)
     return (
         <PageWrapper>
             {
