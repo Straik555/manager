@@ -6,9 +6,8 @@ import ListContacts from './List';
 
 const Contacts = () => {
     const {state} = useCustomStore()
-    console.log('ac', state.searchPhone)
     return (
-        <PageWrapper>
+        <PageWrapper match={true} >
             <div className={'contacts-block'}>
                 <div className={'contacts-block_content'}>
                     {state.phonesList.length === 0 ? <p>Список пуст</p> :
